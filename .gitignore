@@ -1,0 +1,15 @@
+images
+EnergyEfficiencyMeasuresAssessment/output*
+EnergyEfficiencyMeasuresAssessment/config.json
+LongitudinalBenchmarking/config.json
+LongitudinalBenchmarking/output*
+CrossSectionalBenchmarking/output*
+CrossSectionalBenchmarking/.Rproj.user
+*.Rproj*
+*.Rhistory*
+*.RData*
+*.DS_store*
+*.Rproj.user*
+.Rproj.user
+.idea
+config.json

@@ -1,0 +1,73 @@
+{
+  "IndicatorsUnitsSubjects": {
+    "EnergyUseIntensity.Total.Electricity": "ENTRACK:KiloW-H-M2",
+    "EnergyUseIntensity.Baseload.Electricity": "ENTRACK:KiloW-H-M2",
+    "EnergyUseIntensity.HeatingNorm.Electricity": "ENTRACK:KiloW-H-M2-DEG_C",
+    "EnergyUseIntensity.CoolingNorm.Electricity": "ENTRACK:KiloW-H-M2-DEG_C",
+    "EnergyUseIntensity.Total.Gas": "ENTRACK:KiloW-H-M2"
+  },
+  "InputDataDirectory": [
+    "../rentrack/data/20_buildings_with_tariff",
+    "LongitudinalBenchmarking/output_with_tariff"],
+  "Frequencies": ["P1M","P1Y"],
+  "InputOutputDescription": [
+    {
+      "AggregatedKPIOutput": {
+        "Name": "EnergyUseIntensity.Total.Electricity"
+      },
+      "SingleKPIInput":{
+        "Name": "EnergyUseIntensity.Total.Electricity",
+        "FromModel": false
+      }
+    },
+    {
+      "AggregatedKPIOutput": {
+        "Name": "EnergyUseIntensity.Baseload.Electricity"
+      },
+      "SingleKPIInput": {
+        "Name": "EnergyUseIntensity.Baseload.Electricity",
+        "FromModel": true
+      }
+    },
+    {
+      "AggregatedKPIOutput": {
+        "Name": "EnergyUseIntensity.HeatingNorm.Electricity"
+      },
+      "SingleKPIInput": {
+        "Name": "EnergyUseIntensity.Heating.Electricity",
+        "FromModel": true,
+        "RatedBy": [
+          {
+            "Name": "HeatingDegreeDays",
+            "FromModel": true
+          }
+        ]
+      }
+    },
+    { 
+      "AggregatedKPIOutput": {
+        "Name": "EnergyUseIntensity.CoolingNorm.Electricity"
+      },
+      "SingleKPIInput": {
+        "Name": "EnergyUseIntensity.Cooling.Electricity",
+        "FromModel": true,
+        "RatedBy": [
+          {
+            "Name": "CoolingDegreeDays",
+            "FromModel": true
+          }
+        ]
+      }
+    },
+    { 
+      "AggregatedKPIOutput": {
+        "Name": "EnergyUseIntensity.Total.Gas"
+      },
+      "SingleKPIInput": {
+        "Name": "EnergyUseIntensity.Total.Gas",
+        "FromModel": false
+      }
+    }
+  ],
+  "OutputDataDirectory": "CrossSectionalBenchmarking/output"
+}

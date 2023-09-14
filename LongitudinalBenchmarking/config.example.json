@@ -1,0 +1,19 @@
+{
+  "PYTHON3_BIN": "",
+  "MLFlow": {
+    "ModelTrainingPeriodicity": "",
+    "ForceModelTraining": true,
+    "MLFLOW_BIN": "",
+    "TrackingUri": "",
+    "IncludeArtifacts": true
+  },
+  "InputDataDirectory": "",
+  "OutputDataDirectory": "",
+  "MongoConnection":{
+    "Host": "",
+    "Port": "",
+    "User": "",
+    "Password": "",
+    "DB": ""
+  }
+}

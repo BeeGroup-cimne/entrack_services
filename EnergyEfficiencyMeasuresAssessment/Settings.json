@@ -1,0 +1,135 @@
+{
+  "EEMAssessmentConditions": {
+    "MinimumDaysBeforeEEM": 180,
+    "MinimumTimestepsBeforeEEM": 5,
+    "MinimumDaysAfterEEM": 180,
+    "MaximumDaysAfterEEM": 365,
+    "MinDaysWithoutOutliers": 40,
+    "ForceAssessmentBySingleEEM": true,
+    "ForceAssignedEEMProjects": false,
+    "ForceConsiderEEMProjectInvestment": false
+  },
+  "EEMLifespan": {
+    "BuildingFabricMeasure": 25,
+    "LightingMeasure": 10,
+    "RenewableGenerationMeasure": 25,
+    "HVACAndHotWaterMeasure": 15,
+    "ElectricPowerSystemMeasure": 10,
+    "default": 10
+  },
+  "EEMMeasuredPropertyComponents": {
+    "BuildingFabricMeasure": ["Heating","Cooling","Baseload","Total"],
+    "LightingMeasure": ["Baseload","Total"],
+    "RenewableGenerationMeasure": ["Heating","Cooling","Baseload","Total"],
+    "HVACAndHotWaterMeasure": ["Heating","Cooling","Baseload","Total"],
+    "ElectricPowerSystemMeasure": ["Heating","Cooling","Baseload","Total"],
+    "default": ["Heating","Cooling","Baseload","Total"]
+  },
+  "EEMDefaultShareOfAffectedElement": 100,
+  "EEMDiscountRate": 5,
+  "Indicators": {
+    "AggregatableByTime": {
+      "Name": ["EnergyUseSavingsRelative", "EnergyUseSavings", "EnergyUseSavingsIntensity", "EnergyCostSavingsRelative", 
+        "EnergyCostSavings", "EnergyCostSavingsIntensity", "EnergyEmissionsSavingsRelative", "EnergyEmissionsSavings", 
+        "EnergyEmissionsSavingsIntensity"],
+      "AllowedMeasuredProperties": ["EnergyConsumptionGridElectricity", "EnergyConsumptionGas", "EnergyConsumptionTotal", 
+        "EnergyConsumptionPrimary"]
+    },
+    "NonAggregatableByTime": {
+      "Name": ["NormalisedInvestmentCost","AvoidanceCost","SimplePayback","NetPresentValue","ProfitabilityIndex",
+        "NetPresentValueQuotient","InternalRateOfReturn"],
+      "AllowedMeasuredProperties": ["EnergyConsumptionTotal"]
+    }
+  },
+  "IndicatorsUnitsSubjects": {
+    "EnergyUseSavingsRelative": "unit:PERCENT",
+    "EnergyUseSavings": "unit:KiloW-HR",
+    "EnergyUseSavingsIntensity": "unit:KiloW-HR-PER-M2",
+    "EnergyCostSavingsRelative": "unit:PERCENT",
+    "EnergyCostSavings": "unit:Euro",
+    "EnergyCostSavingsIntensity": "ENTRACK:Euro-M2",
+    "EnergyEmissionsSavingsRelative": "unit:PERCENT",
+    "EnergyEmissionsSavings": "ENTRACK:KiloGM-CO2",
+    "EnergyEmissionsSavingsIntensity": "ENTRACK:KiloGM-CO2-M2",
+    "NormalisedInvestmentCost": "ENTRACK:Euro-M2",
+    "AvoidanceCost": "ENTRACK:Euro-KiloW-HR",
+    "SimplePayback": "unit:YR",
+    "NetPresentValue": "unit:Euro",
+    "ProfitabilityIndex": "",
+    "NetPresentValueQuotient": "",
+    "InternalRateOfReturn": "unit:PERCENT"
+  },
+  "IndicatorsTimeAggregationFunctions": {
+    "EnergyUseSavingsRelative": "WEIGHTED-AVG",
+    "EnergyUseSavings": "SUM",
+    "EnergyUseSavingsIntensity": "SUM",
+    "EnergyCostSavingsRelative": "WEIGHTED-AVG",
+    "EnergyCostSavings": "SUM",
+    "EnergyCostSavingsIntensity": "SUM",
+    "EnergyEmissionsSavingsRelative": "WEIGHTED-AVG",
+    "EnergyEmissionsSavings": "SUM",
+    "EnergyEmissionsSavingsIntensity": "SUM"
+  },
+  "MeasuredPropertiesDeviceAggregators": {
+    "totalElectricityConsumption": "EnergyConsumptionGridElectricity",
+    "totalGasConsumption": "EnergyConsumptionGas"
+  },
+  "TransformToAggregatableMeasuredProperties": {
+    "EnergyConsumptionTotal": {
+      "DeviceAggregatorsToAggregate": ["totalElectricityConsumption", "totalGasConsumption"],
+      "DefaultFactorsByMeasuredProperty": {
+        "Other": 1
+      }
+    },
+    "EnergyConsumptionPrimary": {
+      "DeviceAggregatorsToAggregate": ["totalElectricityConsumption", "totalGasConsumption"],
+      "DefaultFactorsByMeasuredProperty": {
+        "EnergyConsumptionGas": 1.195,
+        "EnergyConsumptionGridElectricity": 2.368,
+        "EnergyConsumptionDiesel": 1.182,
+        "EnergyConsumptionLPG": 1.204,
+        "EnergyConsumptionCoal": 1.084,
+        "EnergyConsumptionPellets": 1.113,
+        "EnergyConsumptionWood": 1.037,
+        "EnergyConsumptionRenewableElectricityAuto-Consumption": 0,
+        "Other": 1
+      }
+    }
+  },
+  "Frequencies": ["","P1M","P1Y"],
+  "DataCleaning": {
+    "OutliersDetection": {
+      "window": {
+        "PT1H": "P1M",
+        "P1D": "P6M",
+        "P1M": "P1Y",
+        "P1Y": null
+      },
+      "calendarFeatures": {
+        "PT1H": ["H","HOL"],
+        "P1D": ["U","HOL"],
+        "P1M": ["m"],
+        "P1Y": ["intercept"]
+      },
+      "mode": "upperAndLower",
+      "upperModelPercentile": 90,
+      "lowerModelPercentile": 10,
+      "upperPercentualThreshold": 75,
+      "lowerPercentualThreshold": 75
+    },
+    "CheckForDisruption": {
+      "minIniDate": "2020-03-14",
+      "maxIniDate": "2020-03-23",
+      "minEndDate": "2020-06-21",
+      "maxEndDate": "2022-08-30",
+      "minInitialMonths": 6,
+      "checkFor": "incrementAndDecrement",
+      "minDecrementPercentualAffectation": 30,
+      "minIncrementPercentualAffectation": 120,
+      "defaultPeriod":{
+        "minDate": "2020-03-01",
+        "maxDate": "2020-08-31"
+      }
+    }
+  }
+}
